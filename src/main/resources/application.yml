@@ -1,0 +1,43 @@
+spring:
+  application:
+    name: @project.artifactId@
+  profiles:
+    active: dev
+  http:
+    multipart:
+      max-file-size: 2000MB
+      max-request-size: 2500MB
+server:
+  port: 5001
+info:
+  author: dengb
+  email: 71290@topscore.com.cn
+  app:
+    name: @project.groupId@:@project.artifactId@
+    encoding: @project.build.sourceEncoding@
+    java:
+      source: @java.version@
+      target: @java.version@
+eureka:
+  client:
+    service-url:
+      defaultZone: http://admin:password@localhost:8761/eureka/
+  instance:
+    prefer-ip-address: true
+flyway:
+  baseline-version: 1.0
+---
+spring:
+  profiles: dev
+  datasource:
+    url: jdbc:mysql://localhost:3306/omnidb
+    driver-class-name: com.mysql.jdbc.Driver
+    username: root
+    password: root
+  jpa:
+    database: mysql
+    show-sql: true
+    hibernate:
+      ddl-auto: none
+flyway:
+  locations: classpath:db/migration/mysql
